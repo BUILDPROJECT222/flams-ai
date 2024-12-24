@@ -48,7 +48,7 @@ export const Flams = () => {
     });
 
     const [copied, setCopied] = useState(false);
-    const contractAddress = "9HiB8wntQK3ucFFdHx5EHVtKzrfoDbpDhzDwEjV1pump"; // Your contract address
+    const contractAddress = "deploying...";
 
     // Achievements list
     const achievements = [
@@ -322,8 +322,9 @@ export const Flams = () => {
     // Add bgStyle definition
     const bgStyle = {
         background: `linear-gradient(
-            rgba(0, 0, 0, 0.7),
-            rgba(0, 0, 0, 0.8)
+            135deg,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 40, 70, 0.90)
         ),
         url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -331,21 +332,151 @@ export const Flams = () => {
         backgroundAttachment: 'fixed'
     };
 
+    const [aiMetrics, setAiMetrics] = useState({
+        intelligenceLevel: 109.82,
+        powerLevel: 96.5,
+        adaptability: 85,
+        marketEngagement: 92,
+        creativity: 88,
+        logic: 94,
+        intuition: 87,
+        resilience: 91,
+    });
+
+    const [networkStatus, setNetworkStatus] = useState('OPTIMAL');
+    const [marketStatus, setMarketStatus] = useState('HIGH');
+
+    const renderMetricsGrid = () => (
+        <div className="metrics-grid">
+            {/* Intelligence Level */}
+            <div className="metric-card glitch-effect featured">
+                <div className="metric-header">
+                    <span className="metric-icon">🧠</span>
+                    INTELLIGENCE LEVEL
+                </div>
+                <div className="metric-value highlighted">
+                    {aiMetrics.intelligenceLevel}
+                </div>
+                <div className="metric-status">
+                    STATUS: ENHANCED
+                </div>
+            </div>
+
+            {/* Power Level */}
+            <div className="metric-card glitch-effect">
+                <div className="metric-header">
+                    <span className="metric-icon">⚡</span>
+                    POWER LEVEL
+                </div>
+                <div className="progress-ring">
+                    <svg viewBox="0 0 36 36">
+                        <path d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="rgba(0, 255, 136, 0.1)"
+                            strokeWidth="3"
+                        />
+                        <path d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="url(#gradient)"
+                            strokeWidth="3"
+                            strokeDasharray={`${aiMetrics.powerLevel}, 100`}
+                        />
+                    </svg>
+                    <div className="percentage">{aiMetrics.powerLevel}%</div>
+                </div>
+            </div>
+
+            {/* Market Engagement */}
+            <div className="metric-card glitch-effect market">
+                <div className="metric-header">
+                    <span className="metric-icon">📈</span>
+                    MARKET ENGAGEMENT
+                </div>
+                <div className="market-status">
+                    <span className="status-text">{marketStatus}</span>
+                    <div className="market-indicator"></div>
+                </div>
+            </div>
+
+            {/* AI Personality Matrix */}
+            <div className="metric-card glitch-effect matrix-card">
+                <div className="metric-header">
+                    <span className="metric-icon">🔮</span>
+                    AI PERSONALITY MATRIX
+                </div>
+                <div className="matrix-grid">
+                    {['Creativity', 'Logic', 'Intuition', 'Resilience'].map(trait => (
+                        <div key={trait} className="matrix-item">
+                            <span className="trait-name">{trait}</span>
+                            <div className="trait-bar">
+                                <div 
+                                    className="trait-fill"
+                                    style={{width: `${aiMetrics[trait.toLowerCase()]}%`}}
+                                ></div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+
+    const [systemLogs, setSystemLogs] = useState([
+        "INITIALIZING NEURAL NETWORK...",
+        "QUANTUM PROCESSORS ONLINE",
+        "BLOCKCHAIN INTEGRATION COMPLETE",
+        "AI CORE SYSTEMS OPERATIONAL"
+    ]);
+
+    const addSystemLog = (log) => {
+        setSystemLogs(prev => [...prev, log].slice(-5));
+    };
+
+    const renderSystemTerminal = () => (
+        <div className="system-terminal">
+            <div className="terminal-header">
+                <span className="terminal-title">SYSTEM LOGS</span>
+                <div className="terminal-controls">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div className="terminal-content">
+                {systemLogs.map((log, index) => (
+                    <div key={index} className="log-entry">
+                        <span className="timestamp">{new Date().toLocaleTimeString()}</span>
+                        <span className="log-text">{log}</span>
+                    </div>
+                ))}
+                <div className="terminal-cursor"></div>
+            </div>
+        </div>
+    );
+
     return (
-        <div className="flams-container" style={bgStyle}>
+        <div className="flams-container modern-theme" style={bgStyle}>
             <div className="nav-bar">
-                <div className="logo">FLAMS</div>
-                <div className="nav-buttons">
-                    <div className="contract-address">
-                        <span className="address-label">Contract:</span>
-                        <div className="address-container">
-                            <span className="address">{contractAddress}</span>
+                <div className="nav-left">
+                    <img src={logoIcon} alt="FLAMS" className="nav-logo" />
+                    <div className="nav-title">FLAMS AI</div>
+                </div>
+                
+                <div className="nav-center">
+                    <div className="contract-display">
+                        <div className="contract-label">Smart Contract</div>
+                        <div className="contract-value">
+                            <span className="address-text">{contractAddress}</span>
                             <button 
-                                className="copy-button"
+                                className="copy-btn"
                                 onClick={copyToClipboard}
                             >
                                 {copied ? (
-                                    <span className="copied">✓ Copied!</span>
+                                    <span className="copy-success">✓</span>
                                 ) : (
                                     <svg className="copy-icon" viewBox="0 0 24 24">
                                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
@@ -354,24 +485,25 @@ export const Flams = () => {
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <div className="nav-right">
                     <button 
-                        className="social-button twitter-button"
+                        className="x-button"
                         onClick={handleTwitterClick}
                     >
-                        <svg 
-                            viewBox="0 0 24 24" 
-                            className="twitter-icon"
-                        >
+                        <svg viewBox="0 0 24 24" className="x-icon">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
-                        Follow @EF3
+                        <span>@EF3</span>
                     </button>
-                    <div className="wallet-buttons">
+                    
+                    <div className="wallet-section">
                         <WalletMultiButton />
                         {connected && (
                             <button 
-                                className="disconnect-button"
-                                onClick={handleDisconnect}
+                                className="disconnect-btn"
+                                onClick={disconnect}
                             >
                                 Disconnect
                             </button>
@@ -502,6 +634,24 @@ export const Flams = () => {
                     {renderMarketAnalysis()}
                 </div>
             )}
+
+            <div className="dashboard-content">
+                <div className="evolution-dashboard">
+                    <div className="dashboard-header">
+                        <h2 className="section-title">
+                            <span className="title-icon">🧠</span>
+                            AI EVOLUTION MATRIX
+                            <div className="header-line"></div>
+                        </h2>
+                        <div className="matrix-status">
+                            <span className="status-dot"></span>
+                            SYSTEM ONLINE
+                        </div>
+                    </div>
+                    {renderMetricsGrid()}
+                    {renderSystemTerminal()}
+                </div>
+            </div>
         </div>
     );
 }; 
