@@ -47,6 +47,9 @@ export const Flams = () => {
         recommendations: []
     });
 
+    const [copied, setCopied] = useState(false);
+    const contractAddress = "deploying..."; // Your contract address
+
     // Achievements list
     const achievements = [
         { id: 'first_win', name: 'First Victory', description: 'Win your first AI battle' },
@@ -157,6 +160,16 @@ export const Flams = () => {
 
     const handleTwitterClick = () => {
         window.open('https://x.com/EF3', '_blank');
+    };
+
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(contractAddress);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
     };
 
     const renderPersonalityChart = () => {
@@ -323,6 +336,24 @@ export const Flams = () => {
             <div className="nav-bar">
                 <div className="logo">FLAMS</div>
                 <div className="nav-buttons">
+                    <div className="contract-address">
+                        <span className="address-label">Contract:</span>
+                        <div className="address-container">
+                            <span className="address">{contractAddress}</span>
+                            <button 
+                                className="copy-button"
+                                onClick={copyToClipboard}
+                            >
+                                {copied ? (
+                                    <span className="copied">✓ Copied!</span>
+                                ) : (
+                                    <svg className="copy-icon" viewBox="0 0 24 24">
+                                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
+                    </div>
                     <button 
                         className="social-button twitter-button"
                         onClick={handleTwitterClick}
