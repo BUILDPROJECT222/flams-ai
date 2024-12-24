@@ -1,0 +1,32 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: #000000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Override Wallet Button styles */
+.wallet-adapter-button {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 6px !important;
+  font-weight: bold !important;
+  transition: opacity 0.2s !important;
+}
+
+.wallet-adapter-button:hover {
+  opacity: 0.8 !important;
+} 
