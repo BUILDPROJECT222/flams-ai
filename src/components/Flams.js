@@ -48,7 +48,7 @@ export const Flams = () => {
     });
 
     const [copied, setCopied] = useState(false);
-    const contractAddress = "deploying...";
+    const contractAddress = "5k8VynFAeNXo2sSYhvowyN58VnUZnVvHcqvm9CtZpump";
 
     // Achievements list
     const achievements = [
